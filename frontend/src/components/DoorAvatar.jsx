@@ -6,23 +6,23 @@ export default function DoorAvatar({ group, title, iconStr, onClick }) {
 
   return (
     <div 
-      className="absolute flex flex-col items-center justify-center transform -translate-x-1/2 -translate-y-[80%] cursor-pointer group"
+      className="absolute flex flex-col items-center justify-end transform -translate-x-1/2 -translate-y-[100%] cursor-pointer group z-20"
       onClick={onClick}
     >
-      {/* Tall Holographic Cyber Door */}
-      <div className="w-28 h-32 bg-gradient-to-b from-white/80 to-white/40 backdrop-blur-md border border-blue-200/50 shadow-[0_0_15px_rgba(59,130,246,0.1)] rounded-xl relative flex flex-col items-center justify-start pt-3 group-hover:bg-blue-50/80 transition-all group-hover:scale-105 group-hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
-         
-         {/* Glowing HUD accent */}
-         <div className="absolute top-0 w-20 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
-         <div className="absolute bottom-0 w-12 h-1 bg-cyan-400 rounded-t-full opacity-50"></div>
-         
-         {/* Door Nameplate (Top) */}
-         <div className="w-[90%] bg-[#1a1f2e] text-cyan-400 px-1 py-1 rounded border border-[#2a3142] text-[8px] font-mono font-bold shadow-inner truncate text-center tracking-wider uppercase mb-4">
-             {title || (group && group.id)}
-         </div>
+      {/* Wall Nameplate (Above Door) */}
+      <div className="bg-[#1a1f2e] text-cyan-400 px-3 py-1 rounded-t-md border-t-2 border-x-2 border-cyan-500/50 text-[9px] font-mono font-bold shadow-lg w-28 overflow-hidden text-center tracking-wider mb-[-2px] z-30">
+         <div className="truncate w-full">{title || (group && group.id)}</div>
+      </div>
 
+      {/* Cyber Door */}
+      <div className="w-24 h-32 bg-gradient-to-b from-[#0f172a] to-[#1e293b] backdrop-blur-md border-2 border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.2)] rounded-t-xl rounded-b-none relative flex flex-col items-center justify-center group-hover:bg-[#1e293b] transition-all group-hover:shadow-[0_0_25px_rgba(6,182,212,0.5)]">
+         
+         {/* Glowing vertical lines */}
+         <div className="absolute left-2 top-0 bottom-0 w-[1px] bg-cyan-500/30"></div>
+         <div className="absolute right-2 top-0 bottom-0 w-[1px] bg-cyan-500/30"></div>
+         
          {/* Center Icon */}
-         <div className="w-12 h-12 rounded-full bg-white/90 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] flex items-center justify-center text-blue-600 font-bold text-2xl border border-blue-100">
+         <div className="w-12 h-12 rounded-full bg-black/60 flex items-center justify-center text-cyan-400 font-bold text-2xl border border-cyan-400/50 shadow-[inset_0_0_10px_rgba(6,182,212,0.2)] group-hover:text-cyan-300 group-hover:border-cyan-300">
             {initial}
          </div>
       </div>

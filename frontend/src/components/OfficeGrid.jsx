@@ -56,13 +56,34 @@ export default function OfficeGrid() {
 
   // We need to decide what to render based on currentRoom
   let renderItems = [];
-  
   if (currentRoom === 'Main') {
-      renderItems = employees;
+      // In the main room, we want to show the doors (groups) AND the top 16 processes working at the desks
+      const allSingles = [];
+      employees.forEach(e => {
+          if (e.isGroup && e.children) {
+              e.children.forEach(c => {
+                  let child = { ...c };
+                  child.isGroup = false;
+                  child.id = String(child.pid);
+                  allSingles.push(child);
+              });
+          } else if (!e.isGroup) {
+              allSingles.push(e);
+          }
+      });
+      allSingles.sort((a, b) => b.memory_mb - a.memory_mb);
+      const deskProcesses = allSingles.slice(0, 16);
+      
+      renderItems = [...employees.filter(e => e.isGroup), ...deskProcesses];
   } else {
       const roomGroup = employees.find(e => e.isGroup && e.id === currentRoom);
       if (roomGroup && roomGroup.children) {
-          renderItems = roomGroup.children;
+          renderItems = roomGroup.children.map(c => {
+             let child = { ...c };
+             child.isGroup = false;
+             child.id = String(child.pid);
+             return child;
+          });
       } else {
           setCurrentRoom('Main'); // Fallback if group disappears
       }
