@@ -325,7 +325,7 @@ export default function OfficeGrid() {
              <div className="absolute transition-all duration-1000 ease-in-out z-10" 
                   style={{ left: 650, top: 210 }}>
                  <DoorAvatar 
-                    title="← 返回主指挥中心"
+                    title="← 主指挥中心"
                     iconStr="🏠"
                     onClick={() => setCurrentRoom('Main')} 
                  />
