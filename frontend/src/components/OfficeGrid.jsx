@@ -224,31 +224,62 @@ export default function OfficeGrid() {
               </div>
           </div>
 
-          {DESKS.map((pos, i) => (
-             <div key={i} className="absolute flex flex-col items-center" style={{ left: pos.x - 80, top: pos.y - 70 }}>
-                 {/* Cyber Tech Desk */}
-                 <div className="w-40 h-20 bg-gradient-to-b from-white to-blue-50/30 shadow-[0_8px_20px_rgba(0,0,0,0.04)] rounded-lg border border-blue-100 relative flex justify-center">
-                    {/* Glowing LED Strip on desk edge */}
-                    <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50"></div>
-                    
-                    {/* Monitor Stand */}
-                    <div className="absolute top-2 w-8 h-1 bg-gray-300 rounded"></div>
-                    <div className="absolute top-3 w-2 h-4 bg-gray-400"></div>
-                    {/* Monitor Display */}
-                    <div className="absolute -top-6 w-24 h-14 bg-[#1a1f2e] rounded border-2 border-[#0f141e] shadow-lg relative overflow-hidden flex items-center justify-center">
-                       {/* Cyber screen grid/lines */}
-                       <div className="w-full h-full opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #3b82f6 2px, #3b82f6 3px)'}}></div>
-                       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-white/5"></div>
-                    </div>
-                    {/* Keyboard */}
-                    <div className="absolute bottom-4 w-16 h-3 bg-white shadow-sm rounded border border-gray-200"></div>
-                    {/* Mouse */}
-                    <div className="absolute bottom-4 right-6 w-2.5 h-4 bg-white rounded-full shadow-sm border border-gray-100 flex justify-center">
-                       <div className="w-0.5 h-1 bg-cyan-400 mt-0.5 rounded-full animate-pulse"></div>
-                    </div>
+          {DESKS.map((pos, i) => {
+             // Find who is assigned to this desk
+             const assignedPid = Object.keys(deskAssignments.current).find(p => 
+                deskAssignments.current[p].x === pos.x && deskAssignments.current[p].y === pos.y
+             );
+             // Only show the nameplate if the process is currently rendered in this room
+             const proc = assignedPid ? renderItems.find(item => !item.isGroup && String(item.pid) === String(assignedPid)) : null;
+             
+             let displayName = "";
+             if (proc && proc.name) {
+                 displayName = proc.name.length > 12 ? proc.name.substring(0, 10) + '..' : proc.name;
+             }
+
+             return (
+                 <div key={i} className="absolute flex flex-col items-center" style={{ left: pos.x - 88, top: pos.y - 70 }}>
+                     {/* Cyber Tech Desk - Widened */}
+                     <div className="w-44 h-24 bg-gradient-to-b from-white to-blue-50/30 shadow-[0_8px_20px_rgba(0,0,0,0.04)] rounded-lg border border-blue-100 relative flex justify-center">
+                        {/* Glowing LED Strip on desk edge */}
+                        <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50"></div>
+                        
+                        {/* Monitor Stand */}
+                        <div className="absolute top-2 w-8 h-2 bg-gray-300 rounded"></div>
+                        <div className="absolute top-4 w-2 h-5 bg-gray-400"></div>
+                        {/* Monitor Display */}
+                        <div className="absolute -top-6 w-28 h-16 bg-[#1a1f2e] rounded border-2 border-[#0f141e] shadow-lg relative overflow-hidden flex items-center justify-center">
+                           {/* Cyber screen grid/lines */}
+                           <div className="w-full h-full opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #3b82f6 2px, #3b82f6 3px)'}}></div>
+                           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-white/5"></div>
+                           
+                           {/* Monitor Screen Name */}
+                           {displayName && (
+                               <div className="absolute text-[8px] text-cyan-400 font-mono font-bold tracking-wider px-1 opacity-80 shadow-sm">
+                                   {displayName}
+                               </div>
+                           )}
+                        </div>
+                        {/* Keyboard */}
+                        <div className="absolute bottom-5 w-16 h-3.5 bg-white shadow-sm rounded border border-gray-200"></div>
+                        {/* Mouse */}
+                        <div className="absolute bottom-5 right-7 w-2.5 h-4 bg-white rounded-full shadow-sm border border-gray-100 flex justify-center">
+                           <div className="w-0.5 h-1 bg-cyan-400 mt-0.5 rounded-full animate-pulse"></div>
+                        </div>
+                        
+                        {/* Nameplate on the Desk */}
+                        {displayName && (
+                           <div className="absolute bottom-2 left-2 w-16 h-5 bg-[#1a1f2e] border border-blue-500/50 rounded-sm shadow-md flex items-center justify-center transform -rotate-6">
+                               <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400 opacity-50"></div>
+                               <span className="text-[7px] text-cyan-100 font-bold truncate px-1 w-full text-center tracking-widest">
+                                   {displayName}
+                               </span>
+                           </div>
+                        )}
+                     </div>
                  </div>
-             </div>
-          ))}
+             );
+          })}
 
           {/* Dynamic Doors Layer */}
           {mappedDoors.map((group) => (
