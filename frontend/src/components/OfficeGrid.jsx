@@ -323,7 +323,7 @@ export default function OfficeGrid() {
           {/* Exit Door when in Sub-Room */}
           {currentRoom !== 'Main' && (
              <div className="absolute transition-all duration-1000 ease-in-out z-10" 
-                  style={{ left: 650, top: 140 }}>
+                  style={{ left: 650, top: 210 }}>
                  <DoorAvatar 
                     title="← 返回主指挥中心"
                     iconStr="🏠"
