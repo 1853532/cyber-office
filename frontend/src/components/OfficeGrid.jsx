@@ -10,6 +10,7 @@ export default function OfficeGrid() {
   const [currentRoom, setCurrentRoom] = useState('Main'); // 'Main' or group ID
   
   const deskAssignments = useRef(new Map());
+  const treadmillStateTracker = useRef(new Map());
 
   useEffect(() => {
     let ws = null;
@@ -118,7 +119,40 @@ export default function OfficeGrid() {
          } else {
              // Individual Agent
              if (mappedAgents.length >= 16) continue; // Desk limit
-             const state = getEmployeeState(item.cpu, item.memory_mb);
+             let state = getEmployeeState(item.cpu, item.memory_mb);
+             
+             // --- Treadmill Debounce Logic ---
+             let tState = treadmillStateTracker.current.get(item.pid) || { firstBusyTime: null, enteredTreadmillTime: null };
+             const now = Date.now();
+             
+             if (state.icon === '💦') {
+                 if (tState.enteredTreadmillTime) {
+                     // Already on treadmill, keep state
+                 } else {
+                     if (!tState.firstBusyTime) {
+                         tState.firstBusyTime = now;
+                         state = { ...state, animation: '', icon: '👨‍💻', bg: 'bg-green-500', color: 'text-green-600', label: '准备起飞', description: 'CPU拉高，热身中...' };
+                     } else if (now - tState.firstBusyTime >= 3000) {
+                         tState.enteredTreadmillTime = now;
+                     } else {
+                         state = { ...state, animation: '', icon: '👨‍💻', bg: 'bg-green-500', color: 'text-green-600', label: '准备起飞', description: 'CPU拉高，热身中...' };
+                     }
+                 }
+             } else {
+                 if (tState.enteredTreadmillTime) {
+                     if (now - tState.enteredTreadmillTime >= 5000) {
+                         tState.firstBusyTime = null;
+                         tState.enteredTreadmillTime = null;
+                     } else {
+                         // Force stay on treadmill
+                         state = { ...state, animation: 'animate-bounce', icon: '💦', bg: 'bg-red-500', color: 'text-red-500', label: '强制拉练', description: '正在完成最后的冲刺' };
+                     }
+                 } else {
+                     tState.firstBusyTime = null;
+                 }
+             }
+             treadmillStateTracker.current.set(item.pid, tState);
+             // ---------------------------------
              
              let loc;
              if (state.icon === '☕') {
