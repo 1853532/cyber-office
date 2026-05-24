@@ -171,7 +171,7 @@ export default function OfficeGrid() {
           {/* Static Furniture Scenes in Flat CSS Style */}
           
           {/* Pantry */}
-          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 170, width: '200px', height: '200px' }}>
+          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 220, width: '200px', height: '200px' }}>
               <div className="w-48 h-32 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex flex-wrap p-3 gap-2 justify-center content-start">
                  <div className="absolute -top-3 bg-gradient-to-r from-blue-500 to-cyan-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10">Energy Station</div>
                  
@@ -193,7 +193,7 @@ export default function OfficeGrid() {
           </div>
 
           {/* Treadmill (Gym) */}
-          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 470, width: '200px', height: '200px' }}>
+          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 520, width: '200px', height: '200px' }}>
               <div className="w-48 h-24 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex items-center p-2">
                  <div className="absolute -top-3 bg-gradient-to-r from-red-500 to-orange-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10">Overclock Gym</div>
                  
@@ -210,7 +210,7 @@ export default function OfficeGrid() {
           </div>
 
           {/* Bed (Rest Area) */}
-          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 740, width: '200px', height: '140px' }}>
+          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 790, width: '200px', height: '140px' }}>
               <div className="w-48 h-28 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex items-center p-2">
                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-indigo-500 to-purple-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10 whitespace-nowrap">Sleep Mode</div>
                  
