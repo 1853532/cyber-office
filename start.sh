@@ -26,6 +26,7 @@ echo -e "${GREEN}✅ 环境检查通过${NC}\n"
 # 停止可能存在的旧进程
 echo "🧹 清理可能遗留的旧服务..."
 pkill -f "uvicorn main:app" || true
+pkill -f "vite" || true
 
 # 安装和启动后端
 echo -e "${BLUE}📦 [1/2] 正在初始化后端服务 (FastAPI)...${NC}"
