@@ -238,41 +238,41 @@ export default function OfficeGrid() {
              }
 
              return (
-                 <div key={i} className="absolute flex flex-col items-center" style={{ left: pos.x - 88, top: pos.y - 70 }}>
-                     {/* Cyber Tech Desk - Widened */}
-                     <div className="w-44 h-24 bg-gradient-to-b from-white to-blue-50/30 shadow-[0_8px_20px_rgba(0,0,0,0.04)] rounded-lg border border-blue-100 relative flex justify-center">
+                 <div key={i} className="absolute flex flex-col items-center" style={{ left: pos.x - 96, top: pos.y - 70 }}>
+                     {/* Cyber Tech Desk - Enlarged to w-48 h-28 */}
+                     <div className="w-48 h-28 bg-gradient-to-b from-white to-blue-50/30 shadow-[0_8px_20px_rgba(0,0,0,0.06)] rounded-lg border border-blue-200 relative flex justify-center">
                         {/* Glowing LED Strip on desk edge */}
-                        <div className="absolute top-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-50"></div>
+                        <div className="absolute top-0 w-full h-[3px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-50"></div>
                         
                         {/* Monitor Stand */}
-                        <div className="absolute top-2 w-8 h-2 bg-gray-300 rounded"></div>
-                        <div className="absolute top-4 w-2 h-5 bg-gray-400"></div>
+                        <div className="absolute top-3 w-10 h-2 bg-gray-300 rounded"></div>
+                        <div className="absolute top-5 w-2.5 h-6 bg-gray-400"></div>
                         {/* Monitor Display */}
-                        <div className="absolute -top-6 w-28 h-16 bg-[#1a1f2e] rounded border-2 border-[#0f141e] shadow-lg relative overflow-hidden flex items-center justify-center">
+                        <div className="absolute -top-8 w-32 h-18 bg-[#1a1f2e] rounded border-2 border-[#0f141e] shadow-lg relative overflow-hidden flex items-center justify-center" style={{ height: '72px' }}>
                            {/* Cyber screen grid/lines */}
                            <div className="w-full h-full opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #3b82f6 2px, #3b82f6 3px)'}}></div>
                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-white/5"></div>
                            
                            {/* Monitor Screen Name */}
                            {displayName && (
-                               <div className="absolute text-[8px] text-cyan-400 font-mono font-bold tracking-wider px-1 opacity-80 shadow-sm">
+                               <div className="absolute text-[9px] text-cyan-400 font-mono font-bold tracking-wider px-1 opacity-80 shadow-sm">
                                    {displayName}
                                </div>
                            )}
                         </div>
                         {/* Keyboard */}
-                        <div className="absolute bottom-5 w-16 h-3.5 bg-white shadow-sm rounded border border-gray-200"></div>
+                        <div className="absolute bottom-6 w-20 h-4 bg-white shadow-sm rounded border border-gray-200"></div>
                         {/* Mouse */}
-                        <div className="absolute bottom-5 right-7 w-2.5 h-4 bg-white rounded-full shadow-sm border border-gray-100 flex justify-center">
-                           <div className="w-0.5 h-1 bg-cyan-400 mt-0.5 rounded-full animate-pulse"></div>
+                        <div className="absolute bottom-6 right-8 w-3 h-5 bg-white rounded-full shadow-sm border border-gray-100 flex justify-center">
+                           <div className="w-1 h-1 bg-cyan-400 mt-1 rounded-full animate-pulse"></div>
                         </div>
                         
-                        {/* Nameplate on the Desk */}
-                        {displayName && (
-                           <div className="absolute bottom-2 left-2 w-16 h-5 bg-[#1a1f2e] border border-blue-500/50 rounded-sm shadow-md flex items-center justify-center transform -rotate-6">
-                               <div className="absolute top-0 left-0 w-full h-[1px] bg-cyan-400 opacity-50"></div>
-                               <span className="text-[7px] text-cyan-100 font-bold truncate px-1 w-full text-center tracking-widest">
-                                   {displayName}
+                        {/* Physical Nameplate on the Desk */}
+                        {proc && (
+                           <div className="absolute bottom-3 left-3 px-2 py-1 bg-[#1a1f2e] border-2 border-gray-600 rounded shadow-md flex flex-col items-center justify-center z-10" style={{ transform: 'perspective(100px) rotateX(10deg)' }}>
+                               <div className="w-full h-[1px] bg-cyan-500 opacity-50 mb-0.5"></div>
+                               <span className="text-[8px] text-cyan-400 font-bold truncate max-w-[60px] text-center tracking-widest leading-none">
+                                   {proc.name}
                                </span>
                            </div>
                         )}
