@@ -296,9 +296,9 @@ export default function OfficeGrid() {
                         
                         {/* Physical Nameplate on the Desk */}
                         {proc && (
-                           <div className="absolute bottom-2 left-2 w-20 h-6 bg-[#1a1f2e] border-2 border-gray-600 rounded shadow-md flex flex-col items-center justify-center z-10" style={{ transform: 'perspective(100px) rotateX(10deg)' }}>
+                           <div className="absolute bottom-[18px] left-2 w-[60px] h-5 bg-[#1a1f2e] border-2 border-gray-600 rounded shadow-md flex flex-col items-center justify-center z-10" style={{ transform: 'perspective(100px) rotateX(10deg)' }}>
                                <div className="w-11/12 h-[1px] bg-cyan-500 opacity-50 mb-0.5"></div>
-                               <span className="text-[7px] text-cyan-400 font-bold w-full truncate text-center tracking-widest leading-none px-1">
+                               <span className="text-[6px] text-cyan-400 font-bold w-full truncate text-center tracking-widest leading-none px-1">
                                    {proc.name}
                                </span>
                            </div>
