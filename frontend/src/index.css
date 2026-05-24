@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .isometric {
+    transform: rotateX(60deg) rotateZ(-45deg);
+    transform-style: preserve-3d;
+  }
+  .isometric-item {
+    transform: rotateZ(45deg) rotateX(-60deg);
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animations for Roles */
+
+/* Programmer typing */
+@keyframes typing {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(-5deg); }
+  50% { transform: translateY(0) rotate(5deg); }
+  75% { transform: translateY(2px) rotate(0deg); }
+}
+.anim-typing {
+  animation: typing 0.2s infinite;
+}
+
+/* System nodding */
+@keyframes nodding {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg) translateY(2px); }
+}
+.anim-nodding {
+  animation: nodding 2s infinite ease-in-out;
+}
+
+/* Social rocking */
+@keyframes rocking {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+.anim-rocking {
+  animation: rocking 1s infinite ease-in-out;
+}
+
+/* Entertainment jumping */
+@keyframes jumping {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.anim-jumping {
+  animation: jumping 0.5s infinite ease-in-out;
+}
+
+/* Sleep zZ */
+@keyframes float-up {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-20px); opacity: 0; }
+}
+.anim-float {
+  animation: float-up 2s infinite linear;
+}
+
+/* Assistant sliding */
+@keyframes sliding {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+.anim-sliding {
+  animation: sliding 1s infinite ease-in-out;
+}
