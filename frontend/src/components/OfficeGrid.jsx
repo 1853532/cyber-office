@@ -42,16 +42,15 @@ export default function OfficeGrid() {
     setSelectedEmp(null);
   };
 
-  const LOC_PANTRY = { x: 180, y: 230 };
-  const LOC_TREADMILL = { x: 180, y: 510 };
-  const LOC_TOILET = { x: 180, y: 800 };
+  const LOC_PANTRY = { x: 180, y: 260 };
+  const LOC_TREADMILL = { x: 180, y: 460 };
+  const LOC_TOILET = { x: 180, y: 660 };
   
   const DESKS = [
-    { x: 500, y: 300 }, { x: 750, y: 300 }, { x: 1000, y: 300 },
-    { x: 500, y: 450 }, { x: 750, y: 450 }, { x: 1000, y: 450 },
-    { x: 500, y: 600 }, { x: 750, y: 600 }, { x: 1000, y: 600 },
-    { x: 500, y: 750 }, { x: 750, y: 750 }, { x: 1000, y: 750 },
-    { x: 500, y: 900 }, { x: 750, y: 900 }, { x: 1000, y: 900 },
+    { x: 430, y: 280 }, { x: 650, y: 280 }, { x: 870, y: 280 }, { x: 1090, y: 280 },
+    { x: 430, y: 460 }, { x: 650, y: 460 }, { x: 870, y: 460 }, { x: 1090, y: 460 },
+    { x: 430, y: 640 }, { x: 650, y: 640 }, { x: 870, y: 640 }, { x: 1090, y: 640 },
+    { x: 430, y: 820 }, { x: 650, y: 820 }, { x: 870, y: 820 }, { x: 1090, y: 820 },
   ];
 
   // We need to decide what to render based on currentRoom
@@ -113,12 +112,12 @@ export default function OfficeGrid() {
              const containerWidth = 1300;
              const sectionWidth = containerWidth / totalDoors;
              const doorX = (doorIdx * sectionWidth) + (sectionWidth / 2);
-             const doorY = 180; // Sitting exactly on the base of the taller wall
+             const doorY = 210; // Sitting exactly on the base of the taller wall
              mappedDoors.push({ ...item, locX: doorX, locY: doorY });
              doorIdx++;
          } else {
              // Individual Agent
-             if (mappedAgents.length >= 15) continue; // Desk limit
+             if (mappedAgents.length >= 16) continue; // Desk limit
              const state = getEmployeeState(item.cpu, item.memory_mb);
              
              let loc;
@@ -174,7 +173,7 @@ export default function OfficeGrid() {
         <div className="relative w-[1300px] h-[1000px]">
           
           {/* Top Wall Dynamic Sections */}
-          <div className="absolute top-0 left-0 w-full h-[180px] bg-gradient-to-b from-white to-[#f0f4f8] border-b-[4px] border-[#d1d9e6] shadow-sm z-0 flex">
+          <div className="absolute top-0 left-0 w-full h-[210px] bg-gradient-to-b from-white to-[#f0f4f8] border-b-[4px] border-[#d1d9e6] shadow-sm z-0 flex">
              {Array.from({ length: Math.max(1, renderItems.filter(i => i.isGroup).length) }).map((_, i) => (
                  <div key={i} className="flex-1 h-full border-r border-[#e2e8f0] relative flex flex-col items-center justify-start pt-6">
                      {/* Cyber HUD Accents */}
@@ -191,29 +190,28 @@ export default function OfficeGrid() {
           {/* Static Furniture Scenes in Flat CSS Style */}
           
           {/* Pantry */}
-          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 220, width: '200px', height: '200px' }}>
+          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 250, width: '200px', height: '200px' }}>
               <div className="w-48 h-32 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex flex-wrap p-3 gap-2 justify-center content-start">
                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-cyan-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10 whitespace-nowrap">Energy Station</div>
                  
                  {/* Coffee cups */}
-                 <div className="w-5 h-5 rounded-full bg-[#8B5A2B] border-[3px] border-white shadow-sm mt-6"></div>
-                 <div className="w-5 h-5 rounded-full bg-[#8B5A2B] border-[3px] border-white shadow-sm mt-6"></div>
-                 <div className="w-5 h-5 rounded-full bg-[#CD853F] border-[3px] border-white shadow-sm mt-6"></div>
-                 <div className="w-5 h-5 rounded-full bg-[#D2691E] border-[3px] border-white shadow-sm mt-6"></div>
+                 <div className="w-4 h-4 bg-[#8B5A2B] rounded-full border border-gray-200"></div>
+                 <div className="w-4 h-4 bg-[#A0522D] rounded-full border border-gray-200"></div>
+                 <div className="w-4 h-4 bg-[#CD853F] rounded-full border border-gray-200"></div>
+                 <div className="w-4 h-4 bg-[#D2691E] rounded-full border border-gray-200"></div>
                  
-                 {/* Glowing Coffee Machine */}
-                 <div className="absolute bottom-4 right-4 w-16 h-12 bg-[#1a1f2e] rounded-lg border-2 border-[#2a3142] shadow-lg flex flex-col items-center justify-start pt-1.5">
-                    <div className="flex gap-1.5">
-                        <div className="w-1.5 h-1.5 bg-red-400 rounded-full"></div>
-                        <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse"></div>
+                 {/* Coffee Machine */}
+                 <div className="w-16 h-12 bg-gray-800 rounded-lg absolute bottom-2 right-2 border border-gray-700 flex justify-center items-center">
+                    <div className="w-10 h-6 bg-gray-900 rounded border border-gray-600 flex justify-center items-start pt-1 gap-1">
+                       <div className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></div>
+                       <div className="w-1 h-1 bg-green-500 rounded-full"></div>
                     </div>
-                    <div className="w-10 h-2 bg-gray-600 mt-2.5 rounded-sm opacity-80"></div>
                  </div>
               </div>
           </div>
 
           {/* Treadmill (Gym) */}
-          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 520, width: '200px', height: '200px' }}>
+          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 450, width: '200px', height: '200px' }}>
               <div className="w-48 h-24 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex items-center p-2">
                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-red-500 to-orange-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10 whitespace-nowrap">Overclock Gym</div>
                  
@@ -221,16 +219,20 @@ export default function OfficeGrid() {
                  <div className="w-6 h-16 bg-blue-50 border-2 border-blue-200 rounded-md ml-2 shadow-sm z-10 flex flex-col items-center py-2 gap-1">
                     <div className="w-3 h-1 bg-blue-400 rounded-full animate-pulse"></div>
                  </div>
-                 
-                 {/* Belt */}
-                 <div className="w-32 h-14 bg-[#1a1f2e] rounded-lg border-4 border-[#2a3142] relative -ml-1 shadow-inner flex items-center justify-center overflow-hidden">
-                    <div className="w-full h-full bg-blue-500/10" style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(59,130,246,0.2) 10px, rgba(59,130,246,0.2) 12px)' }}></div>
+                 {/* Treadmill belt */}
+                 <div className="flex-1 h-16 bg-gradient-to-r from-gray-800 to-gray-700 rounded-r-xl border-y-2 border-r-2 border-gray-600 relative overflow-hidden">
+                     {/* Belt animation lines */}
+                     <div className="w-full h-full opacity-30 flex flex-col justify-between py-1 animate-[slide_1s_linear_infinite]">
+                        <div className="w-full h-[1px] bg-cyan-400"></div>
+                        <div className="w-full h-[1px] bg-cyan-400"></div>
+                        <div className="w-full h-[1px] bg-cyan-400"></div>
+                     </div>
                  </div>
               </div>
           </div>
 
-          {/* Bed (Rest Area) */}
-          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 790, width: '200px', height: '140px' }}>
+          {/* Rest Area */}
+          <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 650, width: '200px', height: '140px' }}>
               <div className="w-48 h-28 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex items-center p-2">
                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-indigo-500 to-purple-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10 whitespace-nowrap">Sleep Mode</div>
                  
