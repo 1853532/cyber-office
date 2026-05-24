@@ -42,9 +42,9 @@ export default function OfficeGrid() {
     setSelectedEmp(null);
   };
 
-  const LOC_PANTRY = { x: 180, y: 260 };
-  const LOC_TREADMILL = { x: 180, y: 460 };
-  const LOC_TOILET = { x: 180, y: 660 };
+  const LOC_PANTRY = { x: 180, y: 314 };
+  const LOC_TREADMILL = { x: 180, y: 498 };
+  const LOC_TOILET = { x: 180, y: 706 };
   
   const DESKS = [
     { x: 430, y: 340 }, { x: 650, y: 340 }, { x: 870, y: 340 }, { x: 1090, y: 340 },
