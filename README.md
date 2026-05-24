@@ -1,6 +1,7 @@
 # 🏢 Cyber Office - 系统进程可视化监控台
 
-![Cyber Office Header](./docs/header.png) *(此处可替换为你的实际界面截图)*
+<img width="1186" height="877" alt="截屏2026-05-24 18 36 41" src="https://github.com/user-attachments/assets/ce74a993-ba24-457e-a71f-7defc0057b25" />
+
 
 **Cyber Office** 是一个将枯燥的系统进程（Processes）变成赛博朋克风格“虚拟办公室”的开源项目。它通过读取 macOS/Linux 的系统进程资源占用情况，在网页端实时映射为一个个生动的“打工人”。
 
