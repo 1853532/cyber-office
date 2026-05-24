@@ -21,7 +21,7 @@ export default function DoorAvatar({ group, title, iconStr, onClick }) {
       </div>
       
       {/* Tag */}
-      <div className="bg-white/90 backdrop-blur px-3 py-1 mt-2 rounded border border-blue-100 text-[10px] font-mono font-bold shadow-sm text-gray-600 max-w-[200px] truncate text-center group-hover:text-blue-600 tracking-wider uppercase">
+      <div className="bg-white/90 backdrop-blur px-3 py-1 mt-2 rounded border border-blue-100 text-[10px] font-mono font-bold shadow-sm text-gray-600 w-max whitespace-nowrap text-center group-hover:text-blue-600 tracking-wider uppercase">
          {displayTitle}
       </div>
     </div>

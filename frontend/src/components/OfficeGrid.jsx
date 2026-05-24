@@ -173,7 +173,7 @@ export default function OfficeGrid() {
           {/* Pantry */}
           <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 220, width: '200px', height: '200px' }}>
               <div className="w-48 h-32 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex flex-wrap p-3 gap-2 justify-center content-start">
-                 <div className="absolute -top-3 bg-gradient-to-r from-blue-500 to-cyan-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10">Energy Station</div>
+                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-cyan-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10 whitespace-nowrap">Energy Station</div>
                  
                  {/* Coffee cups */}
                  <div className="w-5 h-5 rounded-full bg-[#8B5A2B] border-[3px] border-white shadow-sm mt-6"></div>
@@ -195,7 +195,7 @@ export default function OfficeGrid() {
           {/* Treadmill (Gym) */}
           <div className="absolute transition-all duration-500 hover:scale-105 flex flex-col items-center" style={{ left: 80, top: 520, width: '200px', height: '200px' }}>
               <div className="w-48 h-24 bg-white shadow-[0_8px_30px_rgba(59,130,246,0.08)] rounded-xl border border-blue-50 relative flex items-center p-2">
-                 <div className="absolute -top-3 bg-gradient-to-r from-red-500 to-orange-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10">Overclock Gym</div>
+                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-red-500 to-orange-400 px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest rounded-full shadow-md z-10 whitespace-nowrap">Overclock Gym</div>
                  
                  {/* Treadmill console */}
                  <div className="w-6 h-16 bg-blue-50 border-2 border-blue-200 rounded-md ml-2 shadow-sm z-10 flex flex-col items-center py-2 gap-1">
