@@ -10,7 +10,7 @@ export default function OfficeGrid() {
   const [currentRoom, setCurrentRoom] = useState('Main'); // 'Main' or group ID
   
   const deskAssignments = useRef(new Map());
-  const treadmillStateTracker = useRef(new Map());
+  const gymAssignments = useRef(new Map());
 
   useEffect(() => {
     let ws = null;
@@ -103,6 +103,11 @@ export default function OfficeGrid() {
              deskAssignments.current.delete(pid);
          }
      }
+     for (let pid of gymAssignments.current.keys()) {
+         if (!currentPids.has(pid)) {
+             gymAssignments.current.delete(pid);
+         }
+     }
      
      const takenDesks = new Set(Array.from(deskAssignments.current.values()));
      
@@ -119,61 +124,42 @@ export default function OfficeGrid() {
          } else {
              // Individual Agent
              if (mappedAgents.length >= 16) continue; // Desk limit
-             let state = getEmployeeState(item.cpu, item.memory_mb);
-             
-             // --- Treadmill Debounce Logic ---
-             let tState = treadmillStateTracker.current.get(item.pid) || { firstBusyTime: null, enteredTreadmillTime: null };
-             const now = Date.now();
-             
-             if (state.icon === '💦') {
-                 if (tState.enteredTreadmillTime) {
-                     // Already on treadmill, keep state
-                 } else {
-                     if (!tState.firstBusyTime) {
-                         tState.firstBusyTime = now;
-                         state = { ...state, animation: '', icon: '👨‍💻', bg: 'bg-green-500', color: 'text-green-600', label: '准备起飞', description: 'CPU拉高，热身中...' };
-                     } else if (now - tState.firstBusyTime >= 3000) {
-                         tState.enteredTreadmillTime = now;
-                     } else {
-                         state = { ...state, animation: '', icon: '👨‍💻', bg: 'bg-green-500', color: 'text-green-600', label: '准备起飞', description: 'CPU拉高，热身中...' };
-                     }
-                 }
-             } else {
-                 if (tState.enteredTreadmillTime) {
-                     if (now - tState.enteredTreadmillTime >= 5000) {
-                         tState.firstBusyTime = null;
-                         tState.enteredTreadmillTime = null;
-                     } else {
-                         // Force stay on treadmill
-                         state = { ...state, animation: 'animate-bounce', icon: '💦', bg: 'bg-red-500', color: 'text-red-500', label: '强制拉练', description: '正在完成最后的冲刺' };
-                     }
-                 } else {
-                     tState.firstBusyTime = null;
-                 }
-             }
-             treadmillStateTracker.current.set(item.pid, tState);
-             // ---------------------------------
+             const state = getEmployeeState(item.cpu, item.memory_mb);
              
              let loc;
              if (state.icon === '☕') {
                  loc = LOC_TOILET;
+                 gymAssignments.current.delete(item.pid);
              } else if (state.icon === '💦') {
                  loc = LOC_TREADMILL;
-             } else {
-                 let deskIdx = deskAssignments.current.get(item.pid);
-                 if (deskIdx === undefined) {
-                     // Find an empty desk
-                     for (let i = 0; i < DESKS.length; i++) {
-                         if (!takenDesks.has(i)) {
-                             deskIdx = i;
-                             break;
-                         }
-                     }
-                     if (deskIdx === undefined) deskIdx = item.pid % DESKS.length; // fallback
-                     deskAssignments.current.set(item.pid, deskIdx);
-                     takenDesks.add(deskIdx);
+                 if (!gymAssignments.current.has(item.pid)) {
+                     gymAssignments.current.set(item.pid, Date.now());
                  }
-                 loc = DESKS[deskIdx];
+             } else {
+                 const gymEntryTime = gymAssignments.current.get(item.pid);
+                 if (gymEntryTime && Date.now() - gymEntryTime < 5000) {
+                     // Force stay at gym for at least 5s
+                     loc = LOC_TREADMILL;
+                     state.icon = '💦';
+                     state.label = 'Overclocking';
+                     state.anim = 'running';
+                 } else {
+                     gymAssignments.current.delete(item.pid);
+                     let deskIdx = deskAssignments.current.get(item.pid);
+                     if (deskIdx === undefined) {
+                         // Find an empty desk
+                         for (let i = 0; i < DESKS.length; i++) {
+                             if (!takenDesks.has(i)) {
+                                 deskIdx = i;
+                                 break;
+                             }
+                         }
+                         if (deskIdx === undefined) deskIdx = item.pid % DESKS.length; // fallback
+                         deskAssignments.current.set(item.pid, deskIdx);
+                         takenDesks.add(deskIdx);
+                     }
+                     loc = DESKS[deskIdx];
+                 }
              }
 
              mappedAgents.push({ ...item, locX: loc.x, locY: loc.y, state: state });
