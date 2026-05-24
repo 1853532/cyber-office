@@ -113,7 +113,7 @@ export default function OfficeGrid() {
              const containerWidth = 1300;
              const sectionWidth = containerWidth / totalDoors;
              const doorX = (doorIdx * sectionWidth) + (sectionWidth / 2);
-             const doorY = 140; // Sitting exactly on the base of the wall
+             const doorY = 180; // Sitting exactly on the base of the taller wall
              mappedDoors.push({ ...item, locX: doorX, locY: doorY });
              doorIdx++;
          } else {
@@ -171,11 +171,10 @@ export default function OfficeGrid() {
 
       <main className="flex-1 flex justify-center items-center w-full h-full mt-4">
         {/* Isometric Floorplan Container WITHOUT Wall Borders */}
-        <div className="relative w-[1300px] h-[950px] bg-transparent" 
-             style={{ transform: 'scale(0.85)', transformOrigin: 'top center' }}>
-             
-          {/* TOP WALL - Sleek Tech Bays */}
-          <div className="absolute top-0 left-0 w-full h-[140px] bg-gradient-to-b from-white to-[#f0f4f8] border-b-[4px] border-[#d1d9e6] shadow-sm z-0 flex">
+        <div className="relative w-[1300px] h-[1000px]">
+          
+          {/* Top Wall Dynamic Sections */}
+          <div className="absolute top-0 left-0 w-full h-[180px] bg-gradient-to-b from-white to-[#f0f4f8] border-b-[4px] border-[#d1d9e6] shadow-sm z-0 flex">
              {Array.from({ length: Math.max(1, renderItems.filter(i => i.isGroup).length) }).map((_, i) => (
                  <div key={i} className="flex-1 h-full border-r border-[#e2e8f0] relative flex flex-col items-center justify-start pt-6">
                      {/* Cyber HUD Accents */}
@@ -247,9 +246,14 @@ export default function OfficeGrid() {
 
           {DESKS.map((pos, i) => {
              // Find who is assigned to this desk
-             const assignedPid = Object.keys(deskAssignments.current).find(p => 
-                deskAssignments.current[p].x === pos.x && deskAssignments.current[p].y === pos.y
-             );
+             let assignedPid = null;
+             for (let [pid, dIdx] of deskAssignments.current.entries()) {
+                 if (dIdx === i) {
+                     assignedPid = pid;
+                     break;
+                 }
+             }
+             
              // Only show the nameplate if the process is currently rendered in this room
              const proc = assignedPid ? renderItems.find(item => !item.isGroup && String(item.pid) === String(assignedPid)) : null;
              
