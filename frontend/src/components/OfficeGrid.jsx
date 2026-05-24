@@ -163,9 +163,13 @@ export default function OfficeGrid() {
       <div className="absolute inset-0 opacity-40 pointer-events-none" style={{ backgroundImage: 'linear-gradient(#cbd5e1 1px, transparent 1px), linear-gradient(90deg, #cbd5e1 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
       
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50 flex flex-col items-center">
-        <h1 className="text-3xl font-bold text-gray-800 tracking-wider drop-shadow">
-          {currentRoom === 'Main' ? '系统进程指挥中心' : `${currentRoom} 独立集群`}
-        </h1>
+        <div className="bg-[#1a1f2e] border-y-2 border-x border-[#3b82f6] shadow-[0_0_20px_rgba(59,130,246,0.3)] px-10 py-3 rounded-md relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+          <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 tracking-widest uppercase">
+            {currentRoom === 'Main' ? '系统进程指挥中心' : `${currentRoom} 独立集群`}
+          </h1>
+        </div>
       </div>
 
       <main className="flex-1 flex justify-center items-center w-full h-full mt-4">
@@ -176,11 +180,7 @@ export default function OfficeGrid() {
           <div className="absolute top-0 left-0 w-full h-[210px] bg-gradient-to-b from-white to-[#f0f4f8] border-b-[4px] border-[#d1d9e6] shadow-sm z-0 flex">
              {Array.from({ length: Math.max(1, renderItems.filter(i => i.isGroup).length) }).map((_, i) => (
                  <div key={i} className="flex-1 h-full border-r border-[#e2e8f0] relative flex flex-col items-center justify-start pt-6">
-                     {/* Cyber HUD Accents */}
-                     <div className="w-24 h-6 bg-[#f8fafc] rounded-full border border-[#cbd5e1] shadow-inner flex items-center justify-center gap-1.5">
-                         <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
-                         <div className="w-4 h-1.5 rounded-full bg-cyan-400 opacity-80"></div>
-                     </div>
+                     {/* Cyber HUD Accents Removed */}
                      {/* Data lines */}
                      <div className="absolute bottom-0 w-[80%] h-[2px] bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
                  </div>
