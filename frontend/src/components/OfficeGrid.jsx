@@ -47,10 +47,10 @@ export default function OfficeGrid() {
   const LOC_TOILET = { x: 180, y: 660 };
   
   const DESKS = [
-    { x: 430, y: 360 }, { x: 650, y: 360 }, { x: 870, y: 360 }, { x: 1090, y: 360 },
-    { x: 430, y: 540 }, { x: 650, y: 540 }, { x: 870, y: 540 }, { x: 1090, y: 540 },
-    { x: 430, y: 720 }, { x: 650, y: 720 }, { x: 870, y: 720 }, { x: 1090, y: 720 },
-    { x: 430, y: 900 }, { x: 650, y: 900 }, { x: 870, y: 900 }, { x: 1090, y: 900 },
+    { x: 430, y: 340 }, { x: 650, y: 340 }, { x: 870, y: 340 }, { x: 1090, y: 340 },
+    { x: 430, y: 500 }, { x: 650, y: 500 }, { x: 870, y: 500 }, { x: 1090, y: 500 },
+    { x: 430, y: 660 }, { x: 650, y: 660 }, { x: 870, y: 660 }, { x: 1090, y: 660 },
+    { x: 430, y: 820 }, { x: 650, y: 820 }, { x: 870, y: 820 }, { x: 1090, y: 820 },
   ];
 
   // We need to decide what to render based on currentRoom
@@ -296,9 +296,9 @@ export default function OfficeGrid() {
                         
                         {/* Physical Nameplate on the Desk */}
                         {proc && (
-                           <div className="absolute bottom-3 left-3 px-2 py-1 bg-[#1a1f2e] border-2 border-gray-600 rounded shadow-md flex flex-col items-center justify-center z-10" style={{ transform: 'perspective(100px) rotateX(10deg)' }}>
-                               <div className="w-full h-[1px] bg-cyan-500 opacity-50 mb-0.5"></div>
-                               <span className="text-[8px] text-cyan-400 font-bold truncate max-w-[60px] text-center tracking-widest leading-none">
+                           <div className="absolute bottom-2 left-2 w-20 h-6 bg-[#1a1f2e] border-2 border-gray-600 rounded shadow-md flex flex-col items-center justify-center z-10" style={{ transform: 'perspective(100px) rotateX(10deg)' }}>
+                               <div className="w-11/12 h-[1px] bg-cyan-500 opacity-50 mb-0.5"></div>
+                               <span className="text-[7px] text-cyan-400 font-bold w-full truncate text-center tracking-widest leading-none px-1">
                                    {proc.name}
                                </span>
                            </div>
